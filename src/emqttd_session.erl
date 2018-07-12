@@ -694,6 +694,7 @@ is_awaiting_full(#state{awaiting_rel = AwaitingRel, max_awaiting_rel = MaxLen}) 
 %% Enqueue message if the client has been disconnected
 dispatch(Msg, State = #state{client_pid = undefined}) ->
     ?LOG(debug, "session dispatch enqueue_msg hook. Msg: ~p", [Msg], State),
+    emqttd_hooks:run('message.enqueued', [State], Msg),
     enqueue_msg(Msg, State);
 
 %% Deliver qos0 message directly to client
