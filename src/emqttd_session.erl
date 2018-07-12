@@ -693,7 +693,7 @@ is_awaiting_full(#state{awaiting_rel = AwaitingRel, max_awaiting_rel = MaxLen}) 
 
 %% Enqueue message if the client has been disconnected
 dispatch(Msg, State = #state{client_pid = undefined}) ->
-    ?LOG("session dispatch enqueue_msg hook. Msg: ~p, State: ~p", [Msg, State]),
+    ?LOG(debug, "session dispatch enqueue_msg hook. Msg: ~p", [Msg], State),
     enqueue_msg(Msg, State);
 
 %% Deliver qos0 message directly to client
